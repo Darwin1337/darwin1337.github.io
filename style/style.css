@@ -1,0 +1,81 @@
+@import url('font-roboto.css');
+
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.titulo p {
+  font-size: 48px;
+  font-weight: 100;
+}
+
+.image-um {
+  background-image: url("../images/bg-1.jpg");
+}
+
+.image-dois {
+  background-image: url("../images/bg-2.jpg");
+}
+
+.image-um,
+.image-dois {
+  z-index: 1;
+  transition: 1s;
+  transform: scale(1);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+}
+
+.image-um:hover,
+.image-dois:hover {
+  z-index: -1;
+  transition: 1s;
+  transform: scale(1.2);
+}
+
+.fase {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fase p {
+  font-size: 50px;
+  font-weight: 100;
+  color: white;
+}
+
+/* .col-um {
+  transition: 1s;
+  background-image: url("../images/bg-1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  transform: scale(1);
+}
+
+.col-dois {
+  transition: 1s;
+  background-image: url("../images/bg-2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  transform: scale(1);
+}
+
+.col-um:hover,
+.col-dois:hover {
+  transition: 1s;
+  transform: scale(1.2);
+  cursor: pointer;
+} */

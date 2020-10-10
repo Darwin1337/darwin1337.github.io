@@ -83,3 +83,9 @@ table tr th {
 select {
   height: 35px;
 }
+
+@media screen and (max-width: 768px) {
+  .change {
+    padding: 0 !important;
+  }
+}

@@ -12,7 +12,6 @@ setInterval(function() {
     $(".image-um").css("-webkit-filter", "blur(2px)");
   }
   if ($(".image-dois").is(":hover") || $(".fase-dois").is(":hover")) {
-    console.log("yes!")
     $(".fase-dois p").css("background", "white");
     $(".fase-dois p").css("color", "rgba(0, 0, 0, 0.5)");
     $(".image-dois").css("filter", "blur(6px)");

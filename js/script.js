@@ -1,6 +1,5 @@
 setInterval(function() {
   if ($(".image-um").is(":hover") || $(".fase-um").is(":hover")) {
-    console.log("yes!")
     $(".fase-um p").css("background", "white");
     $(".fase-um p").css("color", "rgba(0, 0, 0, 0.5)");
     $(".image-um").css("filter", "blur(6px)");

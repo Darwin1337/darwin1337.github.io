@@ -35,7 +35,6 @@ html, body {
 
 .image-um:hover,
 .image-dois:hover {
-  cursor: pointer;
   transition: 1s;
   filter: blur(6px);
   -webkit-filter: blur(6px);
@@ -56,6 +55,12 @@ html, body {
   font-size: 50px;
   font-weight: 200;
   border: 2px solid white;
+  color: white;
+}
+
+.fase-um p a,
+.fase-dois p a {
+  text-decoration: none;
   color: white;
 }
 

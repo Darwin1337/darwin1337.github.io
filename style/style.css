@@ -25,57 +25,36 @@ html, body {
 
 .image-um,
 .image-dois {
-  z-index: 1;
   transition: 1s;
-  transform: scale(1);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
 }
 
 .image-um:hover,
 .image-dois:hover {
-  z-index: -1;
+  cursor: pointer;
   transition: 1s;
-  transform: scale(1.2);
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
 }
 
-.fase {
+.fase-um,
+.fase-dois {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.fase p {
+.fase-um p,
+.fase-dois p {
+  transition: .5s;
+  padding: 10px;
   font-size: 50px;
-  font-weight: 100;
+  font-weight: 200;
+  border: 2px solid white;
   color: white;
 }
-
-/* .col-um {
-  transition: 1s;
-  background-image: url("../images/bg-1.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  transform: scale(1);
-}
-
-.col-dois {
-  transition: 1s;
-  background-image: url("../images/bg-2.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  transform: scale(1);
-}
-
-.col-um:hover,
-.col-dois:hover {
-  transition: 1s;
-  transform: scale(1.2);
-  cursor: pointer;
-} */

@@ -1,3 +1,5 @@
+// dev by darwin1337
+
 class Aluno {
   constructor(nome, nota, opcao) {
     this.Nome = nome;

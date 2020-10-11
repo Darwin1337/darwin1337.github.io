@@ -130,8 +130,8 @@ $("#nota").click(function(event) {
   if ($('#curso option').filter(':selected').val() != 0) {
     addHeader();
     infoAlunos.sort(function(a, b) {
-      var keyA = a.Nota,
-        keyB = b.Nota;
+      var keyA = parseFloat(a.Nota.replace(",", ".")),
+        keyB = parseFloat(b.Nota.replace(",", "."));
       if (ele.hasClass("cima")) {
         if (keyA < keyB) return -1;
         if (keyA > keyB) return 1;

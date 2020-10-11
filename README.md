@@ -1,6 +1,8 @@
 # darwin1337.github.io
 Colocações Detalhadas do Concurso Nacional de Acesso ao Ensino Superior 2020
 
+Aceder ao site pelo link: https://darwin1337.github.io/
+
 ## Features
 
 Possibilidade de ver os colocados em todos os cursos e estabelecimentos com a sua respectiva nota e opção.

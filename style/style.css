@@ -94,3 +94,17 @@ select {
     padding: 0 !important;
   }
 }
+
+@media screen and (max-width: 436px) {
+  .fase-um p,
+  .fase-dois p {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .fase-um p,
+  .fase-dois p {
+    font-size: 35px;
+  }
+}

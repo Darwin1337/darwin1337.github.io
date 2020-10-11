@@ -1,6 +1,16 @@
-dataJSON = []
+class Aluno {
+  constructor(nome, nota, opcao) {
+    this.Nome = nome;
+    this.Nota = nota;
+    this.Opcao = opcao;
+  }
+}
 
+dataJSON = []
+infoAlunos = []
 var facSelect = $('#faculdades');
+var curSelect = $('#curso');
+
 $(document).ready(function() {
   $.getJSON("json/Lista Colocados.json", function(data) {
     $.each(data, function(key, val) {
@@ -27,7 +37,6 @@ $('#tipo').on('change', function() {
   }
 });
 
-var curSelect = $('#curso');
 facSelect.on('change', function() {
   curSelect.find('option:not(:first)').remove();
   if (this.value != 0) {
@@ -37,22 +46,44 @@ facSelect.on('change', function() {
   }
 });
 
+function addHeader() {
+  $("#status").removeClass("hide-div").addClass("show-div");
+  $("#colocados").append($("<tr></tr>")
+  .append($("<th></th>").text("#"))
+  .append($("<th></th>").text("Nome"))
+  .append($("<th></th>").text("Nota"))
+  .append($("<th></th>").text("Opção")))
+  $("#sem-curso").addClass("hide-text");
+}
+
+function appendToTable(array) {
+  for (var i = 0; i < array.length; i++) {
+    $("#colocados").append($("<tr></tr>")
+    .append($("<td></td>").text(i + 1))
+    .append($("<td></td>").text(array[i].Nome))
+    .append($("<td></td>").text(array[i].Nota))
+    .append($("<td></td>").text(array[i].Opcao)))
+  }
+}
+
 $("#ver").click(function(event) {
+  infoAlunos = []
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
-    $("#sem-curso").addClass("hide-text");
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
+    addHeader();
+    var facOption = $('#faculdades option')
+    var curOption = $('#curso option')
+    for (var i = 0; i < dataJSON[facOption.filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
       $("#colocados").append($("<tr></tr>")
       .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome']))
-      .append($("<td></td>").text(dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota']))
-      .append($("<td></td>").text(dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao'])))
+      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nome']))
+      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nota']))
+      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['opcao'])))
+      infoAlunos.push(new Aluno(
+        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nome'],
+        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nota'],
+        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['opcao']
+      ))
     }
   }
   else {
@@ -61,32 +92,10 @@ $("#ver").click(function(event) {
   }
 });
 
-class Aluno {
-  constructor(nome, nota, opcao) {
-    this.Nome = nome;
-    this.Nota = nota;
-    this.Opcao = opcao;
-  }
-}
-
 $("#alfabeticamente-cima").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
-    $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
+    addHeader();
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
         keyB = b.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -94,14 +103,7 @@ $("#alfabeticamente-cima").click(function(event) {
       if (keyA > keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");
@@ -112,21 +114,7 @@ $("#alfabeticamente-cima").click(function(event) {
 $("#alfabeticamente-baixo").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
-    $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
+    addHeader();
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
         keyB = b.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -134,14 +122,7 @@ $("#alfabeticamente-baixo").click(function(event) {
       if (keyA < keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");
@@ -152,21 +133,7 @@ $("#alfabeticamente-baixo").click(function(event) {
 $("#nota-cima").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
-    $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
+    addHeader();
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nota,
         keyB = b.Nota;
@@ -174,14 +141,7 @@ $("#nota-cima").click(function(event) {
       if (keyA > keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");
@@ -192,21 +152,8 @@ $("#nota-cima").click(function(event) {
 $("#nota-baixo").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
+    addHeader();
     $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nota,
         keyB = b.Nota;
@@ -214,14 +161,7 @@ $("#nota-baixo").click(function(event) {
       if (keyA < keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");
@@ -232,21 +172,8 @@ $("#nota-baixo").click(function(event) {
 $("#opcao-cima").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
+    addHeader();
     $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
     infoAlunos.sort(function(a, b) {
       var keyA = a.Opcao,
         keyB = b.Opcao;
@@ -254,14 +181,7 @@ $("#opcao-cima").click(function(event) {
       if (keyA > keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");
@@ -272,21 +192,8 @@ $("#opcao-cima").click(function(event) {
 $("#opcao-baixo").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
-    $("#status").removeClass("hide-div").addClass("show-div");
-    $("#colocados").append($("<tr></tr>")
-    .append($("<th></th>").text("#"))
-    .append($("<th></th>").text("Nome"))
-    .append($("<th></th>").text("Nota"))
-    .append($("<th></th>").text("Opção")))
+    addHeader();
     $("#sem-curso").addClass("hide-text");
-    infoAlunos = []
-    for (var i = 0; i < dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      infoAlunos.push(new Aluno(
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[$('#faculdades option').filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'][i]['opcao']
-      ))
-    }
     infoAlunos.sort(function(a, b) {
       var keyA = a.Opcao,
         keyB = b.Opcao;
@@ -294,14 +201,7 @@ $("#opcao-baixo").click(function(event) {
       if (keyA < keyB) return 1;
       return 0;
     });
-
-    for (var i = 0; i < infoAlunos.length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(infoAlunos[i].Nome))
-      .append($("<td></td>").text(infoAlunos[i].Nota))
-      .append($("<td></td>").text(infoAlunos[i].Opcao)))
-    }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");

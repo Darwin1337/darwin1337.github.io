@@ -16,11 +16,9 @@ var curSelect = $('#curso');
 $(document).ready(function() {
   $.getJSON("json/Lista Colocados.json", function(data) {
     $.each(data, function(key, val) {
+      dataJSON.push(val)
       if (key <= 74) {
         facSelect.append($("<option></option>").attr("value", (key + 1)).text(val['estabelecimento']));
-        dataJSON.push(val)
-      } else {
-        dataJSON.push(val)
       }
     });
   });
@@ -73,20 +71,16 @@ $("#ver").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
     addHeader();
-    var facOption = $('#faculdades option')
-    var curOption = $('#curso option')
-    for (var i = 0; i < dataJSON[facOption.filter(':selected').val() - 1]['data'][$('#curso option').filter(':selected').val() - 1]['colocados'].length; i++) {
-      $("#colocados").append($("<tr></tr>")
-      .append($("<td></td>").text(i + 1))
-      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nome']))
-      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nota']))
-      .append($("<td></td>").text(dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['opcao'])))
+    var facOption = $('#faculdades option').filter(':selected').val() - 1
+    var curOption = $('#curso option').filter(':selected').val() - 1
+    for (var i = 0; i < dataJSON[facOption]['data'][curOption]['colocados'].length; i++) {
       infoAlunos.push(new Aluno(
-        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nome'],
-        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['nota'],
-        dataJSON[facOption.filter(':selected').val() - 1]['data'][curOption.filter(':selected').val() - 1]['colocados'][i]['opcao']
+        dataJSON[facOption]['data'][curOption]['colocados'][i]['nome'],
+        dataJSON[facOption]['data'][curOption]['colocados'][i]['nota'],
+        dataJSON[facOption]['data'][curOption]['colocados'][i]['opcao']
       ))
     }
+    appendToTable(infoAlunos);
   }
   else {
     $("#status").removeClass("show-div").addClass("hide-div");

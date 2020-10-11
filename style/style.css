@@ -10,58 +10,28 @@ html, body {
   height: 100%;
 }
 
-.titulo p {
-  font-size: 48px;
-  font-weight: 100;
+table tr,
+table tr td,
+table tr th {
+  border: 1px solid lightgray;
+  padding: 10px;
 }
 
-.image-um {
-  background-image: url("../images/bg-1.jpg");
+select {
+  height: 35px;
 }
 
-.image-dois {
-  background-image: url("../images/bg-2.jpg");
-}
-
-.image-um,
-.image-dois {
-  transition: 1s;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-}
-
-.image-um:hover,
-.image-dois:hover {
-  transition: 1s;
-  filter: blur(6px);
-  -webkit-filter: blur(6px);
-}
-
-.fase-um,
-.fase-dois {
+.btn-navigation {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.fase-um p,
-.fase-dois p {
-  transition: .5s;
-  padding: 10px;
-  font-size: 50px;
-  font-weight: 200;
-  border: 2px solid white;
-  color: white;
-}
-
-.fase-um p a,
-.fase-dois p a {
-  text-decoration: none;
-  color: white;
+.btns input {
+  font-size: 32px;
+  border: 1px solid black;
+  margin: 20px;
 }
 
 .hide-text {
@@ -78,33 +48,16 @@ html, body {
   height: auto;
 }
 
-table tr,
-table tr td,
-table tr th {
-  border: 1px solid lightgray;
-  padding: 10px;
-}
-
-select {
-  height: 35px;
-}
-
 @media screen and (max-width: 768px) {
   .change {
     padding: 0 !important;
   }
-}
 
-@media screen and (max-width: 436px) {
-  .fase-um p,
-  .fase-dois p {
-    font-size: 40px;
+  #um {
+    font-size: 36px !important;
   }
-}
 
-@media screen and (max-width: 320px) {
-  .fase-um p,
-  .fase-dois p {
-    font-size: 35px;
+  #dois {
+    font-size: 22px !important;
   }
 }

@@ -13,4 +13,4 @@ Aceder ao site pelo link: https://darwin1337.github.io/
 
 A informação utilizada neste projeto foi toda disponibilizada pela DGES em https://www.dges.gov.pt/coloc/2020/, apenas estão em páginas diferentes. O website resultou de uma *cross reference* entre a página de colocados (que apenas tem alguns algarismos do CC e o nome do aluno) e a página de candidatos (que já tem nota de candidatura, opção, etc.).
 
-A informação foi extraída utilizando *Python* (*source code* disnponível [aqui](https://github.com/Darwin1337/darwin1337.github.io/tree/main/py-sourcecode)) e, ao todo, demorou cerca de 17h a terminar.
+A informação foi extraída utilizando *Python* (*source code* disponível [aqui](https://github.com/Darwin1337/darwin1337.github.io/tree/main/py-sourcecode)) e, ao todo, demorou cerca de 17h a terminar.

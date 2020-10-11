@@ -5,8 +5,8 @@ Aceder ao site pelo link: https://darwin1337.github.io/
 
 ## Funcionalidades
 
-[+] Possibilidade de ver os colocados em todos os cursos de todos os estabelecimentos com a sua respectiva nota e opção;
-[+] Possibilidade de ordenar colocados por ordem alfabética, por nota de candidatura e por opção;
+[+] Possibilidade de ver os colocados em todos os cursos de todos os estabelecimentos com a sua respectiva nota e opção.
+[+] Possibilidade de ordenar colocados por ordem alfabética, por nota de candidatura e por opção.
 [+] Possibilidade de pesquisar alunos por nome e ver as suas opções bem como a sua colocação.
 
 ## Informação Relevante

@@ -1,5 +1,3 @@
-// dev by darwin1337
-
 class Aluno {
   constructor(nome, nota, opcao) {
     this.Nome = nome;
@@ -26,6 +24,7 @@ $(document).ready(function() {
 
 $('#tipo').on('change', function() {
   facSelect.find('option:not(:first)').remove();
+  curSelect.find('option:not(:first)').remove();
   if (this.value == 2) {
     for (var i = 75; i < dataJSON.length; i++) {
       facSelect.append($("<option></option>").attr("value", (i + 1)).text(dataJSON[i]['estabelecimento']));
@@ -49,20 +48,20 @@ facSelect.on('change', function() {
 function addHeader() {
   $("#status").removeClass("hide-div").addClass("show-div");
   $("#colocados").append($("<tr></tr>")
-  .append($("<th></th>").text("#"))
-  .append($("<th></th>").text("Nome"))
-  .append($("<th></th>").text("Nota"))
-  .append($("<th></th>").text("Opção")))
+    .append($("<th></th>").text("#"))
+    .append($("<th></th>").text("Nome"))
+    .append($("<th></th>").text("Nota"))
+    .append($("<th></th>").text("Opção")))
   $("#sem-curso").addClass("hide-text");
 }
 
 function appendToTable(array) {
   for (var i = 0; i < array.length; i++) {
     $("#colocados").append($("<tr></tr>")
-    .append($("<td></td>").text(i + 1))
-    .append($("<td></td>").text(array[i].Nome))
-    .append($("<td></td>").text(array[i].Nota))
-    .append($("<td></td>").text(array[i].Opcao)))
+      .append($("<td></td>").text(i + 1))
+      .append($("<td></td>").text(array[i].Nome))
+      .append($("<td></td>").text(array[i].Nota))
+      .append($("<td></td>").text(array[i].Opcao)))
   }
 }
 
@@ -74,98 +73,88 @@ $("#ver").click(function(event) {
     var facOption = $('#faculdades option').filter(':selected').val() - 1
     var curOption = $('#curso option').filter(':selected').val() - 1
     for (var i = 0; i < dataJSON[facOption]['data'][curOption]['colocados'].length; i++) {
+      $("#colocados").append($("<tr></tr>")
+        .append($("<td></td>").text(i + 1))
+        .append($("<td></td>").text(dataJSON[facOption]['data'][curOption]['colocados'][i]['nome']))
+        .append($("<td></td>").text(dataJSON[facOption]['data'][curOption]['colocados'][i]['nota']))
+        .append($("<td></td>").text(dataJSON[facOption]['data'][curOption]['colocados'][i]['opcao'])))
       infoAlunos.push(new Aluno(
         dataJSON[facOption]['data'][curOption]['colocados'][i]['nome'],
         dataJSON[facOption]['data'][curOption]['colocados'][i]['nota'],
         dataJSON[facOption]['data'][curOption]['colocados'][i]['opcao']
       ))
     }
-    appendToTable(infoAlunos);
-  }
-  else {
+  } else {
     $("#status").removeClass("show-div").addClass("hide-div");
     $("#sem-curso").removeClass("hide-text");
   }
 });
 
-$("#alfabeticamente-cima").click(function(event) {
+$("#alfabeticamente").click(function(event) {
+  var ele = $("#alfabeticamente")
+  if (ele.hasClass("cima")) {
+    ele.removeClass("cima").addClass("baixo").val("Alfabeticamente ▼");
+  } else if (ele.hasClass("baixo")) {
+    ele.removeClass("baixo").addClass("cima").val("Alfabeticamente ▲");
+  }
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
     addHeader();
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
         keyB = b.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
+      if (ele.hasClass("cima")) {
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+      } else if (ele.hasClass("baixo")) {
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+      }
       return 0;
     });
     appendToTable(infoAlunos);
-  }
-  else {
+  } else {
     $("#status").removeClass("show-div").addClass("hide-div");
     $("#sem-curso").removeClass("hide-text");
   }
 });
 
-$("#alfabeticamente-baixo").click(function(event) {
-  $("#colocados tr").empty();
-  if ($('#curso option').filter(':selected').val() != 0) {
-    addHeader();
-    infoAlunos.sort(function(a, b) {
-      var keyA = a.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-        keyB = b.Nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      if (keyA > keyB) return -1;
-      if (keyA < keyB) return 1;
-      return 0;
-    });
-    appendToTable(infoAlunos);
+$("#nota").click(function(event) {
+  var ele = $("#nota")
+  if (ele.hasClass("cima")) {
+    ele.removeClass("cima").addClass("baixo").val("Por Nota ▼");
+  } else if (ele.hasClass("baixo")) {
+    ele.removeClass("baixo").addClass("cima").val("Por Nota ▲");
   }
-  else {
-    $("#status").removeClass("show-div").addClass("hide-div");
-    $("#sem-curso").removeClass("hide-text");
-  }
-});
-
-$("#nota-cima").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
     addHeader();
     infoAlunos.sort(function(a, b) {
       var keyA = a.Nota,
         keyB = b.Nota;
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
+      if (ele.hasClass("cima")) {
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+      } else if (ele.hasClass("baixo")) {
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+      }
       return 0;
     });
     appendToTable(infoAlunos);
-  }
-  else {
+  } else {
     $("#status").removeClass("show-div").addClass("hide-div");
     $("#sem-curso").removeClass("hide-text");
   }
 });
 
-$("#nota-baixo").click(function(event) {
-  $("#colocados tr").empty();
-  if ($('#curso option').filter(':selected').val() != 0) {
-    addHeader();
-    $("#sem-curso").addClass("hide-text");
-    infoAlunos.sort(function(a, b) {
-      var keyA = a.Nota,
-        keyB = b.Nota;
-      if (keyA > keyB) return -1;
-      if (keyA < keyB) return 1;
-      return 0;
-    });
-    appendToTable(infoAlunos);
+$("#opcao").click(function(event) {
+  var ele = $("#opcao")
+  if (ele.hasClass("cima")) {
+    ele.removeClass("cima").addClass("baixo").val("Por Opção ▼");
+  } else if (ele.hasClass("baixo")) {
+    ele.removeClass("baixo").addClass("cima").val("Por Opção ▲");
   }
-  else {
-    $("#status").removeClass("show-div").addClass("hide-div");
-    $("#sem-curso").removeClass("hide-text");
-  }
-});
-
-$("#opcao-cima").click(function(event) {
   $("#colocados tr").empty();
   if ($('#curso option').filter(':selected').val() != 0) {
     addHeader();
@@ -173,33 +162,17 @@ $("#opcao-cima").click(function(event) {
     infoAlunos.sort(function(a, b) {
       var keyA = a.Opcao,
         keyB = b.Opcao;
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
+      if (ele.hasClass("cima")) {
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+      } else if (ele.hasClass("baixo")) {
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+      }
       return 0;
     });
     appendToTable(infoAlunos);
-  }
-  else {
-    $("#status").removeClass("show-div").addClass("hide-div");
-    $("#sem-curso").removeClass("hide-text");
-  }
-});
-
-$("#opcao-baixo").click(function(event) {
-  $("#colocados tr").empty();
-  if ($('#curso option').filter(':selected').val() != 0) {
-    addHeader();
-    $("#sem-curso").addClass("hide-text");
-    infoAlunos.sort(function(a, b) {
-      var keyA = a.Opcao,
-        keyB = b.Opcao;
-      if (keyA > keyB) return -1;
-      if (keyA < keyB) return 1;
-      return 0;
-    });
-    appendToTable(infoAlunos);
-  }
-  else {
+  } else {
     $("#status").removeClass("show-div").addClass("hide-div");
     $("#sem-curso").removeClass("hide-text");
   }

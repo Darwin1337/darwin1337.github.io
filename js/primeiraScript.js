@@ -12,7 +12,7 @@ var facSelect = $('#faculdades');
 var curSelect = $('#curso');
 
 $(document).ready(function() {
-  $.getJSON("json/Lista Colocados.json", function(data) {
+  $.getJSON("json/primeira-fase/Lista Colocados.json", function(data) {
     $.each(data, function(key, val) {
       dataJSON.push(val)
       if (key <= 74) {

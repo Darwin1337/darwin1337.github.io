@@ -14,7 +14,7 @@ def clear():
 def pause():
     os.system("pause")
 
-DriverPath = r"C:\Users\diogo\Desktop\chromedriver.exe"
+DriverPath = r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\py-sourcecode\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 
 link = ["https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=12&action=2"]
@@ -81,6 +81,9 @@ try:
                 print("Candidatos guardados: " + str(TotalCandidatos))
                 JSONindex = JSONindex + 1
             JSONarray.append(JSONcontent)
+            # Save adicional
+            with open(r'C:\Users\diogo\Desktop\CNAES 2020\JSONs\Segunda Fase\Lista Candidatos.json', 'w') as f:
+                f.write(json.dumps(JSONarray))
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")
     with open(r'C:\Users\diogo\Desktop\Lista Candidatos.json', 'w') as f:

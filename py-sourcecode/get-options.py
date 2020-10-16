@@ -83,7 +83,7 @@ try:
                     for q in range(len(newCC)):
                         TotalAlunos += 1
                         clear()
-                        print("Alunos: " + str(TotalAlunos) + " de 62561\n")
+                        print("Alunos: " + str(TotalAlunos) + " de 62561")
                         EncontrouColocado = False
                         JSONcontent = ""
                         JSONcontent = {

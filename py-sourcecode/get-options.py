@@ -32,7 +32,7 @@ with open(r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\json\primeira-f
 #         self.Codigo = codigo
 
 class Aluno:
-    def __init__(self, nome, opcao, nota, provaingresso, nota12, nota10_11, cc, codEstab, codCurso, nomeEstab, nomeCurso, maxCandidatos):
+    def __init__(self, nome, opcao, nota, provaingresso, nota12, nota10_11, cc, codEstab, codCurso, nomeEstab, nomeCurso, maxCandidatos, alunoPos):
         self.Nome = nome
         self.Opcao = opcao
         self.Nota = nota
@@ -45,6 +45,7 @@ class Aluno:
         self.NomeEstab = nomeEstab
         self.NomeCurso = nomeCurso
         self.MaxCandidatos = maxCandidatos
+        self.AlunoPos = alunoPos
 
 start = "[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n"
 
@@ -81,7 +82,8 @@ try:
                                         str(candidatos[q]['data'][c]['codigo_curso']),
                                         str(candidatos[q]['estabelecimento']),
                                         str(candidatos[q]['data'][c]['curso']),
-                                        str(len(candidatos[q]['data'][c]['candidatos']))))
+                                        str(len(candidatos[q]['data'][c]['candidatos'])),
+                                        str(i)))
                         print(str(candidatos[x]['data'][j]['candidatos'][k]['nome']))
                         if sum(int(p.Opcao) == 1 for p in MesmoNome) > 1:
                             print("Este nome NAO e unico!\n")
@@ -91,10 +93,8 @@ try:
                             for q in range(len(MesmoNome)):
                                 driver.get("https://www.dges.gov.pt/coloc/2020/col1listaser.asp?CodEstab=" + str(MesmoNome[q].CodEstab) + "&CodCurso=" + str(MesmoNome[q].CodCurso) + "&ids=1&ide=" + str(MesmoNome[q].MaxCandidatos) + "&Mx=" + str(MesmoNome[q].MaxCandidatos))
                                 time.sleep(1)
-                                for c in range(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr"))):
-                                    if str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[2].get_attribute('innerHTML').replace("/n", "").strip()) == str(MesmoNome[q].Nome):
-                                        OnlyCC[q] = str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip())
-                                        MesmoNome[q].CC = str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip())
+                                OnlyCC[q] = str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (int(MesmoNome[q].AlunoPos) + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip())
+                                MesmoNome[q].CC = str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (int(MesmoNome[q].AlunoPos) + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip())
                                 if int(q) == len(MesmoNome) - 1: driver.quit()
                         else:
                             print("Este nome E unico!\n")

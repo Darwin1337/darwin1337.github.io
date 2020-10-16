@@ -16,7 +16,7 @@ $(document).ready(function() {
   $.getJSON("json/" + root + "/Lista Colocados.json", function(data) {
     $.each(data, function(key, val) {
       dataJSON.push(val)
-      if (key <= 74) {
+      if (key <= 68) {
         facSelect.append($("<option></option>").attr("value", (key + 1)).text(val['estabelecimento']));
       }
     });
@@ -27,11 +27,11 @@ $('#tipo').on('change', function() {
   facSelect.find('option:not(:first)').remove();
   curSelect.find('option:not(:first)').remove();
   if (this.value == 2) {
-    for (var i = 75; i < dataJSON.length; i++) {
+    for (var i = 69; i < dataJSON.length; i++) {
       facSelect.append($("<option></option>").attr("value", (i + 1)).text(dataJSON[i]['estabelecimento']));
     }
   } else {
-    for (var i = 0; i < 75; i++) {
+    for (var i = 0; i < 69; i++) {
       facSelect.append($("<option></option>").attr("value", (i + 1)).text(dataJSON[i]['estabelecimento']));
     }
   }

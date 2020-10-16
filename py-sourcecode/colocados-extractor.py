@@ -49,11 +49,12 @@ try:
             JSONarray.append(JSONcontent)
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")
-    with open(r'C:\Users\diogo\Desktop\teste.json', 'w') as f:
+    with open(r'C:\Users\diogo\Desktop\Lista Colocados.json', 'w') as f:
         f.write(json.dumps(JSONarray))
     driver.quit()
     print("[" + datetime.now().strftime("%H:%M:%S") + "] Script concluído com sucesso.")
 except Exception as e:
+    driver.set_window_position(960,540)
     print(str(e))
     traceback.print_exc()
 

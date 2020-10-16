@@ -8,11 +8,12 @@
   <meta name="author" content="Diogo Borges">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Colocações Detalhadas</title>
-  <link rel="icon" type="image/png" href="images/favicon.ico"/>
+  <link rel="icon" type="image/png" href="images/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
+
 <body>
   <div class="container">
     <div class="titulo text-center pt-5">
@@ -21,19 +22,35 @@
     </div>
     <div class="btn-navigation">
       <div class="btns text-center">
-        <input type="submit" class="btn btn-dark" id="bt-um" value="1ª Fase"/>
+        <input type="submit" class="btn btn-dark" id="bt-um" value="1ª Fase" />
       </div>
       <div class="btns text-center">
-        <input type="submit" class="btn btn-dark" id="bt-dois" disabled value="2ª Fase"/>
+        <input type="submit" class="btn btn-dark" id="bt-dois" value="2ª Fase" />
       </div>
       <div class="btns text-center">
-        <input type="submit" class="btn btn-dark" id="bt-tres" disabled value="3ª Fase"/>
+        <input type="submit" class="btn btn-dark" id="bt-tres" disabled value="3ª Fase" />
       </div>
     </div>
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/indexScript.js"></script>
+  <script>
+    $("#bt-um").click(function(event) {
+      window.location.href = "primeira-fase";
+      return false;
+    });
+
+    $("#bt-dois").click(function(event) {
+      window.location.href = "segunda-fase";
+      return false;
+    });
+
+
+    $("#bt-tres").click(function(event) {
+      window.location.href = "terceira-fase";
+      return false;
+    });
+  </script>
 </body>
 
 </html>

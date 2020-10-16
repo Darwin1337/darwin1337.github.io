@@ -14,10 +14,11 @@ def clear():
 def pause():
     os.system("pause")
 
+fase = 2
 DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 driver.set_window_position(2000,2000)
-link = ["https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=12&action=2"]
+link = ["https://www.dges.gov.pt/coloc/2020/col" + str(fase) + "listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col" + str(fase) + "listas.asp?CodR=12&action=2"]
 print("[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n")
 JSONarray = []
 
@@ -46,7 +47,7 @@ try:
                 if driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a"):
                     MaisQueUmaPagina = True
                     print("O curso tem mais que 1 página de candidatos, a gerar URL...")
-                    URLGerado = "https://www.dges.gov.pt/coloc/2020/col2listaser.asp?CodEstab=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[1].split("&")[0]) + "&CodCurso=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[2].split("&")[0]) + "&ids=1&ide=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[5]) + "&Mx=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[5])
+                    URLGerado = "https://www.dges.gov.pt/coloc/2020/col" + str(fase) + "listaser.asp?CodEstab=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[1].split("&")[0]) + "&CodCurso=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[2].split("&")[0]) + "&ids=1&ide=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[5]) + "&Mx=" + str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[2]/tbody/tr/td/a").get_attribute("href").split("=")[5])
                     print("URL gerado: " + URLGerado)
                     driver.execute_script('''window.open("","_blank");''')
                     driver.switch_to.window(driver.window_handles[1])
@@ -64,12 +65,12 @@ try:
                     else:
                         opcao = str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[4].get_attribute('innerHTML').replace("/n", "").strip())
                     JSONcontent['data'][int(JSONindex)]['candidatos'].append({
-                    "nome": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[2].get_attribute('innerHTML').replace("/n", "").strip()),
-                    "cc": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip()),
-                    "nota": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[3].get_attribute('innerHTML').replace("/n", "").strip()),
-                    "opcao": opcao, "prova_ingresso": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[5].get_attribute('innerHTML').replace("/n", "").strip()),
-                    "nota_12ano": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[6].get_attribute('innerHTML').replace("/n", "").strip()),
-                    "nota_10ano_11ano": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[7].get_attribute('innerHTML').replace("/n", "").strip())
+                        "nome": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[2].get_attribute('innerHTML').replace("/n", "").strip()),
+                        "cc": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "").strip()),
+                        "nota": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[3].get_attribute('innerHTML').replace("/n", "").strip()),
+                        "opcao": opcao, "prova_ingresso": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[5].get_attribute('innerHTML').replace("/n", "").strip()),
+                        "nota_12ano": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[6].get_attribute('innerHTML').replace("/n", "").strip()),
+                        "nota_10ano_11ano": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[7].get_attribute('innerHTML').replace("/n", "").strip())
                     })
                 if MaisQueUmaPagina == True:
                     print("Como há mais que uma página, teremos de fechar a aba aberta")
@@ -81,7 +82,7 @@ try:
                 JSONindex = JSONindex + 1
             JSONarray.append(JSONcontent)
             # Save adicional
-            with open(r'C:\Users\diogo\Desktop\CNAES 2020\JSONs\Segunda Fase\Lista Candidatos.json', 'w') as f:
+            with open(r'C:\Users\diogo\Desktop\temp_Lista Candidatos.json', 'w') as f:
                 f.write(json.dumps(JSONarray))
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")
@@ -90,6 +91,7 @@ try:
     driver.quit()
     print("[" + datetime.now().strftime("%H:%M:%S") + "] Script concluído com sucesso.")
 except Exception as e:
+    driver.set_window_position(960,540)
     print(str(e))
     traceback.print_exc()
 

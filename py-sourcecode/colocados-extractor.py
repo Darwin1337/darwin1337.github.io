@@ -14,7 +14,7 @@ def clear():
 def pause():
     os.system("pause")
 
-DriverPath = r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\py-sourcecode\chromedriver.exe"
+DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 driver.set_window_position(2000,2000)
 link = ["https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=12&action=2"]

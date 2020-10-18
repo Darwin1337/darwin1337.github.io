@@ -20,7 +20,7 @@
       <p id="um" style="font-size: 46px; font-weight: 300;">COLOCAÇÕES DETALHADAS</p>
       <p id="dois" style="font-size: 38px; font-weight: 300;">CNAES 2020</p>
     </div>
-    <div class="btn-navigation">
+    <div class="buttons pt-5">
       <div class="btns text-center">
         <input type="submit" class="btn btn-dark" id="bt-um" value="1ª Fase" />
       </div>
@@ -29,6 +29,9 @@
       </div>
       <div class="btns text-center">
         <input type="submit" class="btn btn-dark" id="bt-tres" disabled value="3ª Fase" />
+      </div>
+      <div class="btns text-center">
+        <input type="submit" class="btn btn-dark" id="bt-quatro" value="Pesquisa de Alunos" />
       </div>
     </div>
   </div>
@@ -39,15 +42,16 @@
       window.location.href = "primeira-fase";
       return false;
     });
-
     $("#bt-dois").click(function(event) {
       window.location.href = "segunda-fase";
       return false;
     });
-
-
     $("#bt-tres").click(function(event) {
       window.location.href = "terceira-fase";
+      return false;
+    });
+    $("#bt-quatro").click(function(event) {
+      window.location.href = "pesquisa";
       return false;
     });
   </script>

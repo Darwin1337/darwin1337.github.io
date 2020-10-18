@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Colocações Detalhadas do CNAES 2020">
+  <meta name="keywords" content="HTML, CSS, JSON, JavaScript, Exames Nacionais 2020">
+  <meta name="author" content="Diogo Borges">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa de Alunos</title>
+  <link rel="icon" type="image/png" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center pt-5">
+      <p style="font-size: 46px; font-weight: 300;">PESQUISA DE ALUNOS</p>
+    </div>
+    <hr>
+    <div class"navigation">
+      <button type="submit" class="btn btn-primary" id="bt-um"><i class="fa fa-home text-grey" aria-hidden="true"></i>  Página Inicial</button>
+    </div>
+    <div class="pt-5">
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input style="font-style: italic;" class="form-control my-0 py-1 red-border" type="text" placeholder="Pesquisar aluno..." aria-label="Pesquisar aluno...">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-search text-grey" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="justify-text-center">
+      <table id="colocados" class="w-100 mt-5"></table>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $("#bt-um").click(function(event) {
+      window.location.href = "..";
+      return false;
+    });
+  </script>
+  <script type="text/javascript" src="js/primeiraScript.js"></script>
+</body>
+
+</html>

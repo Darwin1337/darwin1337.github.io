@@ -21,6 +21,9 @@
       <p style="font-size: 32px; font-weight: 300;">1.ª FASE</p>
     </div>
     <hr>
+    <div class"navigation">
+      <button type="submit" class="btn btn-primary" id="bt-voltar"><i class="fa fa-home text-grey" aria-hidden="true"></i>  Página Inicial</button>
+    </div>
     <div class="faculdade">
       <p class="text-left mt-5 mb-2">Tipo de instituto:</p>
       <select class="w-100 text-center" name="tipo" id="tipo">
@@ -69,6 +72,12 @@
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $("#bt-voltar").click(function(event) {
+      window.location.href = "..";
+      return false;
+    });
+  </script>
   <script type="text/javascript" src="js/colocadosScript.js"></script>
 </body>
 

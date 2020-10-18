@@ -47,6 +47,16 @@ select {
   height: auto;
 }
 
+.input-group.md-form.form-sm.form-1 input {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
 @media screen and (max-width: 768px) {
   .change {
     padding: 0 !important;

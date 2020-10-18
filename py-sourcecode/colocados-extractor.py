@@ -14,10 +14,11 @@ def clear():
 def pause():
     os.system("pause")
 
+fase = 2
 DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 driver.set_window_position(2000,2000)
-link = ["https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col2listas.asp?CodR=12&action=2"]
+link = ["https://www.dges.gov.pt/coloc/2020/col" + str(fase) + "listas.asp?CodR=11&action=2", "https://www.dges.gov.pt/coloc/2020/col" + str(fase) + "listas.asp?CodR=12&action=2"]
 print("[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n")
 JSONarray = []
 
@@ -46,6 +47,7 @@ try:
                     JSONcontent['data'][int(JSONindex)]['colocados'].append({ "nome": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[3]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "")) })
                 driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/a").click()
                 JSONindex = JSONindex + 1
+                time.sleep(1)
             JSONarray.append(JSONcontent)
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")

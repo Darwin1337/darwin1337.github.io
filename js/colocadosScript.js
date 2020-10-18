@@ -6,14 +6,13 @@ class Aluno {
   }
 }
 
-dataJSON = []
-infoAlunos = []
+var dataJSON = []
+var infoAlunos = []
 var facSelect = $('#faculdades');
 var curSelect = $('#curso');
 
 $(document).ready(function() {
-  root = $(location).attr('href').split("/")[3]
-  $.getJSON("json/" + root + "/Lista Colocados.json", function(data) {
+  $.getJSON("json/" + $(location).attr('href').split("/")[3] + "/Lista Colocados.json", function(data) {
     $.each(data, function(key, val) {
       dataJSON.push(val)
       if (key <= 68) {

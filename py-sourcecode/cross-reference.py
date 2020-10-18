@@ -12,9 +12,9 @@ def pause():
 
 # [Começo] Código para a cross reference
 
-with open(r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\json\primeira-fase\Lista Candidatos.json", encoding = "utf8") as json_file1:
+with open(r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\json\segunda-fase\Lista Candidatos.json", encoding = "utf8") as json_file1:
     candidatos = json.load(json_file1)
-with open(r"C:\Users\diogo\Desktop\New\1a fase\[Verified] Lista Colocados_Normal.json", encoding = "utf8") as json_file2:
+with open(r"C:\Users\diogo\Desktop\New\2a fase\Lista Colocados_Normal.json", encoding = "utf8") as json_file2:
     colocados = json.load(json_file2)
 
 print("[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n")
@@ -49,7 +49,7 @@ try:
                 print("Erro! Aluno não encontrado!")
             JSONindex = JSONindex + 1
         JSONarray.append(JSONcontent)
-    with open(r'C:\Users\diogo\Desktop\cross_reference_1afase.json', 'w') as f:
+    with open(r'C:\Users\diogo\Desktop\cross_reference_2afase.json', 'w') as f:
         f.write(json.dumps(JSONarray))
 except Exception as e:
     print(str(e))

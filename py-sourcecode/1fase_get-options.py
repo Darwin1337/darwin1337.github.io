@@ -18,7 +18,7 @@ def pause():
 
 with open(r"C:\Users\diogo\Documents\GitHub\darwin1337.github.io\json\primeira-fase\Lista Candidatos.json", encoding = "utf8") as json_file1:
     candidatos = json.load(json_file1)
-with open(r"C:\Users\diogo\Desktop\New\1a fase\[Verified] Lista Colocados_Detalhada.json", encoding = "utf8") as json_file2:
+with open(r"C:\Users\diogo\Desktop\New\1a fase\Lista Colocados_Detalhada.json", encoding = "utf8") as json_file2:
     colocados = json.load(json_file2)
 
 DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
@@ -43,7 +43,7 @@ class Aluno:
         self.IdxEstab = idxEstab
         self.IdxCurso = idxCurso
 
-start = "[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n"
+print("[" + datetime.now().strftime("%H:%M:%S") + "] Script iniciado\n")
 
 fase = 1
 JSONarray = []

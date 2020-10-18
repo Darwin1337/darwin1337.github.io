@@ -21,20 +21,23 @@
     </div>
     <hr>
     <div class"navigation">
-      <button type="submit" class="btn btn-primary" id="bt-um"><i class="fa fa-home text-grey" aria-hidden="true"></i>  Página Inicial</button>
+      <button type="submit" class="btn btn-primary" id="bt-um"><i class="fa fa-home text-grey" aria-hidden="true"></i> Página Inicial</button>
     </div>
     <div class="pt-5">
       <div class="input-group md-form form-sm form-2 pl-0">
-        <input style="font-style: italic;" class="form-control my-0 py-1 red-border" type="text" placeholder="Pesquisar aluno..." aria-label="Pesquisar aluno...">
+        <input id="texto" class="form-control my-0 py-1 red-border" type="text" placeholder="Pesquisar aluno..." aria-label="Pesquisar aluno..." onkeydown="if (event.keyCode == 13) pesquisar();">
         <div class="input-group-append">
-          <button type="submit" class="btn btn-success">
+          <button type="submit" id="pesquisar" class="btn btn-success" onClick="pesquisar()">
             <i class="fa fa-search text-grey" aria-hidden="true"></i>
           </button>
         </div>
       </div>
     </div>
+    <div class="text-left mt-5">
+      <p id="encontrados"></p>
+    </div>
     <div class="justify-text-center">
-      <table id="colocados" class="w-100 mt-5"></table>
+      <table id="colocados" class="w-100 mb-5"></table>
     </div>
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -45,7 +48,7 @@
       return false;
     });
   </script>
-  <script type="text/javascript" src="js/primeiraScript.js"></script>
+  <script type="text/javascript" src="js/pesquisa.js"></script>
 </body>
 
 </html>

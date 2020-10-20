@@ -7,7 +7,7 @@
   <meta name="keywords" content="HTML, CSS, JSON, JavaScript, Exames Nacionais 2020">
   <meta name="author" content="Diogo Borges">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Alunos</title>
+  <title>Detalhes do Aluno</title>
   <link rel="icon" type="image/png" href="favicon.ico" />
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,19 +22,25 @@
     </div>
     <hr>
     <div class"navigation">
-      <button type="submit" class="btn btn-primary" id="bt-back"><i class="fa fa-arrow-left text-grey" aria-hidden="true"></i>  Voltar</button>
-      <button type="submit" class="btn btn-primary" id="bt-um"><i class="fa fa-home text-grey" aria-hidden="true"></i>  Página Inicial</button>
+      <button type="submit" class="btn btn-primary" id="bt-back"><i class="fa fa-arrow-left text-grey" aria-hidden="true"></i> Voltar</button>
+      <button type="submit" class="btn btn-primary" id="bt-um"><i class="fa fa-home text-grey" aria-hidden="true"></i> Página Inicial</button>
     </div>
     <div class="pt-5 text-left">
+      <p style="font-size: 30px;"><b>INFORMAÇÃO</b></p>
+      <hr>
       <p id="nome" class="loading" style="font-size: 24px;"> <span id="nome-text" style="font-size: 24px;">A CARREGAR...</span></p>
       <p id="nota1" class="loading" style="font-size: 18px; color: darkgray;"><b>NOTA 10/10º ANO:</b> <span id="nota1-text" style="font-size: 18px; color: darkgray;">A CARREGAR...</span></p>
       <p id="nota2" class="loading" style="font-size: 18px; color: darkgray;"><b>NOTA 12º ANO:</b> <span id="nota2-text" style="font-size: 18px; color: darkgray;">A CARREGAR...</span></p>
       <p id="total-opcoes" class="loading" style="font-size: 18px; color: darkgray;"><b>OPÇÕES UTILIZADAS:</b> <span id="total-opcoes-text" style="font-size: 18px; color: darkgray;">A CARREGAR...</span></p>
+    </div>
+    <div class="mt-5 w-100">
+      <div class="text-left">
+        <p style="font-size: 30px;"><b>OPÇÕES</b></p>
+      </div>
       <hr>
+      <div id="append-here"></div>
     </div>
-    <div class="justify-text-center">
-      <table id="colocados" class="w-100 mt-5"></table>
-    </div>
+
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>

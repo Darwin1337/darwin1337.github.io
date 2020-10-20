@@ -74,6 +74,56 @@ select {
   cursor: pointer;
 }
 
+#opcoes-colocado,
+#opcoes-nao-colocado {
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 8px;
+}
+
+#opcoes-colocado {
+  background: #149078;
+}
+
+#opcoes-nao-colocado {
+  background: #E74C3C;
+}
+
+#opcoes-colocado .card-titulo {
+  background: #12806A;
+}
+
+#opcoes-nao-colocado .card-titulo {
+  background: #C0392B;
+}
+
+.card-titulo {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 5px;
+  width: 100% !important;
+}
+
+.card-titulo p {
+  color: white;
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.card-details {
+  padding: 20px;
+}
+
+.card-details p {
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.card-details span {
+  font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
   .change {
     padding: 0 !important;

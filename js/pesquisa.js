@@ -68,7 +68,7 @@ $(document.body).on('touchmove', onScroll);
 $(window).on('scroll', onScroll);
 
 function onScroll() {
-  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+  if ($(window).scrollTop() + window.innerHeight >= document.body.scrollHeight) {
     if (!isFinished && isScrollNeeded) {
       if (appendLeft > 20) {
         for (var i = 0; i < 20; i++) {

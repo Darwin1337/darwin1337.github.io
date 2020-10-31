@@ -14,7 +14,7 @@ def clear():
 def pause():
     os.system("pause")
 
-fase = 2
+fase = 3
 DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 driver.set_window_position(2000,2000)
@@ -38,6 +38,7 @@ try:
             driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/form/table[2]/tbody/tr[2]/td/input[5]").click()
             JSONcontent['data'] = []
             for j in range(len(driver.find_elements_by_class_name("inputtext > option"))):
+                time.sleep(1)
                 MaisQueUmaPagina = False
                 print("Curso: " + driver.find_elements_by_class_name("inputtext > option")[j].get_attribute('innerHTML')[7:].replace("\n", ""))
                 JSONcontent['data'].append({ "curso": driver.find_elements_by_class_name("inputtext > option")[j].get_attribute('innerHTML')[7:].replace("\n", ""), "codigo_curso": driver.find_elements_by_class_name("inputtext > option")[j].get_attribute('value') })
@@ -52,10 +53,9 @@ try:
                     driver.execute_script('''window.open("","_blank");''')
                     driver.switch_to.window(driver.window_handles[1])
                     driver.get(URLGerado)
-                    time.sleep(1)
                 else:
                     print("O curso só tem uma página de candidatos")
-                    time.sleep(1)
+                time.sleep(1)
                 print("Encontrados " + str(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr"))) + " alunos candidatos a este curso, a guardar a sua informação...")
                 TotalCandidatos = TotalCandidatos + int(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr")))
                 for c in range(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[4]/tbody/tr"))):
@@ -81,9 +81,6 @@ try:
                 print("Candidatos guardados: " + str(TotalCandidatos))
                 JSONindex = JSONindex + 1
             JSONarray.append(JSONcontent)
-            # Save adicional
-            with open(r'C:\Users\diogo\Desktop\temp_Lista Candidatos.json', 'w') as f:
-                f.write(json.dumps(JSONarray))
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")
     with open(r'C:\Users\diogo\Desktop\Lista Candidatos.json', 'w') as f:

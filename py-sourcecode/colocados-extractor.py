@@ -14,7 +14,7 @@ def clear():
 def pause():
     os.system("pause")
 
-fase = 2
+fase = 3
 DriverPath = r"F:\External Drive(G#)\Backup 2020\Diogo\chromedriver.exe"
 driver = webdriver.Chrome(DriverPath)
 driver.set_window_position(2000,2000)
@@ -41,17 +41,15 @@ try:
                 Select(driver.find_elements_by_class_name('inputtext')[0]).select_by_value(driver.find_elements_by_class_name("inputtext > option")[j].get_attribute('value'))
                 driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/form/table[2]/tbody/tr[2]/td/input[3]").click()
                 JSONcontent['data'][int(JSONindex)]['colocados'] = []
-                time.sleep(1)
                 print("Encontrados " + str(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[3]/tbody/tr"))) + " alunos colocados neste curso\n")
                 for c in range(len(driver.find_elements_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[3]/tbody/tr"))):
                     JSONcontent['data'][int(JSONindex)]['colocados'].append({ "nome": str(driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/table[3]/tbody/tr[%s]" % (c + 1)).find_elements_by_tag_name('td')[1].get_attribute('innerHTML').replace("/n", "")) })
                 driver.find_element_by_xpath("/html/body/div/table/tbody/tr/td/div[2]/a").click()
                 JSONindex = JSONindex + 1
-                time.sleep(1)
             JSONarray.append(JSONcontent)
             driver.get(link[p])
     print("A guardar ficheiro com a informação...")
-    with open(r'C:\Users\diogo\Desktop\Lista Colocados.json', 'w') as f:
+    with open(r'C:\Users\diogo\Desktop\Lista Colocados_another.json', 'w') as f:
         f.write(json.dumps(JSONarray))
     driver.quit()
     print("[" + datetime.now().strftime("%H:%M:%S") + "] Script concluído com sucesso.")

@@ -40,8 +40,6 @@ function ViewStudentDetails(idx, id) {
 }
 
 function GeneratePageNavigation(a, b) {
-  // a = current page
-  // b = total no of pages
   $("#page-navigation").empty();
   if (b <= 4) {
     for (let i = 0; i < b; i++) {
@@ -95,6 +93,11 @@ function URLValidated() {
   keyword = decodeURI(keyword).trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().split(" ");
 
   if (keyword[0].length >= 3) {
+    for (let i = 0; i < nameToShow.length; i++ ) {
+      nameToShow[i] = nameToShow[i].charAt(0).toUpperCase() + nameToShow[i].slice(1).toLowerCase();
+    }
+    $("#texto").val(nameToShow.join(" "))
+
     for (let i = 0; i < extractedData.length; i++) {
       let howManyMatch = 0;
       for (let j = 0; j < keyword.length; j++) {
@@ -109,10 +112,6 @@ function URLValidated() {
 
     if (parseInt(matchingStudents.length) > 0) {
       $("#encontrados").text("ENCONTRADOS " + matchingStudents.length + " RESULTADOS")
-      for (let i = 0; i < nameToShow.length; i++ ) {
-        nameToShow[i] = nameToShow[i].charAt(0).toUpperCase() + nameToShow[i].slice(1).toLowerCase();
-      }
-      $("#texto").val(nameToShow.join(" "))
       pageInURL = $(location).attr('href').split("page=")[1]
       anchorInURL = -1;
       if (pageInURL.indexOf("#")) {

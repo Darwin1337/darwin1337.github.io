@@ -15,6 +15,9 @@
 </head>
 
 <body>
+  <div class="se-pre-con">
+    <h3>A carregar...</h3>
+  </div>
   <div class="container">
     <div class="text-center pt-5">
       <p style="font-size: 46px; font-weight: 300;">PESQUISA DE ALUNOS</p>
@@ -25,9 +28,9 @@
     </div>
     <div class="pt-5">
       <div class="input-group md-form form-sm form-2 pl-0">
-        <input id="texto" class="form-control my-0 py-1 red-border" type="text" placeholder="Pesquisar aluno..." aria-label="Pesquisar aluno..." onkeydown="if (event.keyCode == 13) pesquisar();">
+        <input id="texto" class="form-control my-0 py-1 red-border" type="text" placeholder="Pesquisar aluno..." aria-label="Pesquisar aluno..." onkeydown="if (event.keyCode == 13) SearchByName();">
         <div class="input-group-append">
-          <button type="submit" id="pesquisar" class="btn btn-success" onClick="pesquisar()">
+          <button type="submit" id="pesquisar" class="btn btn-success" onClick="SearchByName()">
             <i class="fa fa-search text-grey" aria-hidden="true"></i>
           </button>
         </div>
@@ -37,8 +40,12 @@
       <p id="encontrados"></p>
     </div>
     <div class="justify-text-center">
-      <table id="colocados" class="w-100 mb-5"></table>
+      <table id="colocados" class="w-100 mb-4"></table>
     </div>
+    <div id="page-navigation" class="page-navigation">
+    </div>
+    <div id="first-page"></div>
+    <br><br>
   </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -21,10 +21,10 @@ $(document).ready(function() {
         }
       });
       if (!foundStudent) {
-        window.location.replace("error");
+        location.replace("error");
       }
     });
   } else {
-    window.location.replace("error");
+    location.replace("error");
   }
 });
